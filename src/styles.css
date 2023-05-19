@@ -34,11 +34,21 @@ body {
   padding: 5px 10px;
   height: 35px;
   border: 0;
-  background-color: green;
+  background-color: #0a0;
   color: white;
   border-radius: 4px;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+  box-shadow: 0 6px #888;
+  margin-top: 12px;
+}
+
+#container button:hover {background-color: green}
+
+#container button:active {
+  background-color: green;
+  box-shadow: 0 3px #888;
+  transform: translateY(4px);
 }
 

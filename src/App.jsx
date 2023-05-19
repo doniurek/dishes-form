@@ -132,7 +132,9 @@ export default function App() {
               )
             }
 
-            <button type='submit'>Submit</button>
+            <div>
+              <button type='submit'>Submit</button>
+            </div>
           </Form>
         )}
       </Formik>
