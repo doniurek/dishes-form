@@ -74,8 +74,19 @@ export default function App() {
           else {
             request_message.slices_of_bread = values.slices_of_bread
           }
-          alert(JSON.stringify(request_message, null, 2))}
-        }
+
+          let response = fetch('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request_message)
+          }).then(response => {
+            if (!response.ok) {
+              alert('Unexpected error... Check your data and try again!')
+            } else {
+              alert('New dish successfully added!')
+            }
+          })
+        }}
       >
         {(props) => (
           <Form>
