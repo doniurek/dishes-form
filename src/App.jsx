@@ -75,7 +75,7 @@ export default function App() {
             request_message.slices_of_bread = values.slices_of_bread
           }
 
-          let response = fetch('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', {
+          fetch('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(request_message)

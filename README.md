@@ -1,6 +1,6 @@
 ## Description
 
-This is a frontend application (recruitment task) using React and Formik designed to communicate with an API.
+This is a frontend application (recruitment task) using React, Formik and Yup designed to communicate with an API.
 The project is orchestrated through the utilization of Vite and npm.
 
 ## How to run the project locally
