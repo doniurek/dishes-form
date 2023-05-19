@@ -1,9 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import './styles.css'
 
 export default function App() {
   return (
-    <div>
+    <div id='container'>
       <h1>Dishes</h1>
       <Formik
         initialValues={{
@@ -25,23 +26,37 @@ export default function App() {
           type: Yup.string()
             .required('Required')
             .oneOf(['pizza', 'soup', 'sandwich']),
-          no_of_slices: Yup.number()
-            .integer('Must be integer')
-            .min(1, 'Must be at least 1')
-            .max(100, 'Must be no more than 100') 
-            .required('Required'),
-          diameter: Yup.number()
-            .min(1, 'Must be at least 1')
-            .max(100, 'Must be no more than 100') 
-            .required('Required'),
-          spiciness_scale: Yup.number()
-            .min(1, 'Must be at least 1')
-            .max(10, 'Must be no more than 10')
-            .required('Required'),
-          slices_of_bread: Yup.number()
-            .min(1, 'Must be at least 1 slice')
-            .min(1, 'Must be no more than 100 slices')
-            .required('Required')
+          no_of_slices: Yup.number().when('type', {
+            is: 'pizza',
+            then: () => Yup.number()
+              .required('Required')
+              .integer('Must be integer')
+              .min(1, 'Must be at least 1')
+              .max(100, 'Must be no more than 100'),
+            otherwise: () => Yup.number().notRequired()
+          }),
+          diameter: Yup.number().when('type', {
+            is: 'pizza',
+            then: () => Yup.number()
+              .required('Required')
+              .min(1, 'Must be at least 1')
+              .max(100, 'Must be no more than 100'),
+            otherwise: () => Yup.number().notRequired()
+          }),
+          spiciness_scale: Yup.number().when('type', {
+            is: 'soup',
+            then: () => Yup.number()
+              .required('Required')
+              .min(1, 'Must be at least 1')
+              .max(100, 'Must be no more than 10'),
+          }),
+          slices_of_bread: Yup.number().when('type', {
+            is: 'sandwich',
+            then: () => Yup.number()
+              .required('Required')
+              .min(1, 'Must be at least 1')
+              .max(100, 'Must be no more than 100'),
+          })
         })}
         onSubmit={(values) => {
           let request_message = {
@@ -94,12 +109,14 @@ export default function App() {
               ) : (props.values.type == 'soup') ? (
                 <>
                   <label htmlFor='spiciness_scale'>Spiciness scale</label>
-                  <Field name='spiciness_scale' type='range' min='1' max='10'/>
+                  <Field name='spiciness_scale' type='range' min='1' max='10' />
+                  <ErrorMessage name="spiciness_scale" />
                 </>
               ) : (
                 <>
                   <label htmlFor='slices_of_bread'>Slices of bread</label>
                   <Field name='slices_of_bread' type='number' min='1' max='100'/>
+                  <ErrorMessage name="slices_of_bread" />
                 </>
               )
             }
