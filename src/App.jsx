@@ -98,7 +98,7 @@ export default function App() {
             {
               (props.values.type == 'pizza') ? (
                 <>
-                  <label htmlFor='no_of_slices'>Number of slices</label>
+                  <label htmlFor='no_of_slices'>Number of Slices</label>
                   <Field name='no_of_slices' type='number' min='1' max='100'/>
                   <ErrorMessage name="no_of_slices" />
 
